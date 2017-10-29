@@ -1,0 +1,116 @@
+/*---------demo的最外层容器------------------*/
+.demo{
+	width: 600px;
+	height: 370.8px;
+	background: #79c753;
+    -webkit-box-shadow: 5px 10px 25px 0px rgba(121,199,83,0.75);
+    -moz-box-shadow: 5px 10px 25px 0px rgba(121,199,83,0.75);
+    box-shadow: 5px 10px 25px 0px rgba(121,199,83,0.75);
+	margin: 30px auto;
+	position: relative;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+
+}
+p{
+	line-height: 100px;
+}
+/*--------------------------------------rotate()-----------------------------------------*/
+#rotate{
+	position: relative;
+}
+#rotate-in{
+	position: absolute;
+	width: 139px;
+	height: 26px;
+	background: #042f40;
+	transform: rotate(-45deg);
+	top: 25px;
+	left: -27px;
+	overflow: hidden;
+	text-align: center;
+	line-height: 25px;
+	color: white;
+}
+/*--------------------------------------skew()------------------------------------------------*/
+#skew{
+	display: inline-block;
+	text-align: center;
+	width: 254px;
+	height: 254px;
+	background: #042f40;
+	top: 58px;
+	transform: skew(13deg,27deg);
+	left: 159px;
+	position: absolute;;
+
+}
+/*-----------------------------------scale()----------------------------------------------------*/
+#scale:hover{
+	transform: scale(1.06,0.96);
+}
+/*---------------------------------translate()------------------------------------------------*/
+#translate:hover{
+	transform: translate(20px,20px);
+}
+/*-------------------------animate,transition------------------------------------------*/
+.img{
+	width:60px;
+	height: 40px;
+	transition:1s height,1s 1s width;
+}
+.img:hover{
+	width: 600px;
+	height: 370.8px;
+}
+/*------------------------------------------animation-------------------------------*/
+
+
+@keyframes typing { from { width: 0; } }
+@keyframes blink-caret { 50% { border-color: transparent; } }
+
+h1 { 
+	font: bold 200% Consolas, Monaco, monospace;
+	border-right: .1em solid;
+	width: 16.5em; /* fallback */
+	width: 30ch; /* # of chars */
+	margin: 2em 1em;
+	white-space: nowrap;
+	overflow: hidden;
+	animation: typing 20s steps(30, end), /* # of steps = # of chars */
+	           blink-caret .5s step-end infinite alternate;
+}
+/*-----------------------------------------heart------------------------------------*/
+
+.heart{
+	width: 600px;
+	height: 370px;
+	animation: pound 1s infinite;
+
+}
+
+@keyframes pound{
+	from {transform: none;}
+	to {transform: scale(1.2);}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
