@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<!--使用Bootstrap的js插件，必须先调入jQuery-->
+	<script src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+
+	<!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<style>
+		.high{
+			color: red;
+			position: absolute;
+			top: 0.5em;
+			right: 0;
+		}
+		.onError{
+			color: red;
+		}
+		.onSuccess{
+			color: green;
+		}
+	</style>
+	<script>
+		$().ready(function () {
+			// 表单class="required的必须填写"
+			$("input.required").each(function () {
+				// 创建元素
+				var $required=$("<strong class='high'>*</strong>")
+				// 追加到文档中
+				$(this).parent().append($required);
+			})
+
+
+
+			// 给表单元素添加失去焦点事件
+			  // 判断是姓名还是邮箱，分别处理
+			    // 姓名：
+			    // 邮箱：
+			    // 将错误信息增加到input框后面
+
+			$("input").blur(function () {
+				var $parent=$(this).parent();
+				// 删除以前的提醒元素
+				$parent.find(".msg").remove();
+				// 验证姓名
+				if($(this).is("#name")){
+				if($.trim(this.value)==""){
+					var errorMsg="请输入姓名！";
+					$parent.append("<span class='msg onError'>"+errorMsg+"</span>");
+
+				}else{
+					var okMsg="输入正确";
+					$parent.find(".high").remove();
+					$parent.append("<span class='msg onSuccess'>"+okMsg+"</span>")
+				}}
+				// 验证邮箱
+				if($(this).is("#email")){
+					if($.trim(this.value)==""||$.trim(this.value)!=""&& !/.+@.+\.[a-zA-Z]{2,4}$/.test($.trim(this.value))){
+						  var errorMsg="请输入正确的邮箱地址";
+						  $parent.append("<span class='msg onError'>"+errorMsg+"</span>");
+					}else{
+						var okMsg="输入正确";
+						$parent.find(".high").remove();
+						$parent.append("<span class='msg onSuccess'>"+okMsg+"</span>")
+					}
+				}
+
+
+			}).keyup(function () {
+				$(this).triggerHandler("blur");
+			}).focus(function () {
+				$(this).triggerHandler("blur");
+			})
+
+			// 点击提交按钮时，触发blur事件，再进行一次验证
+			$("#send").click(function () {
+				//trigger事件执行完后，浏览器会为submit获取焦点
+				$(".required").trigger("blur");
+				var numError=$("form .onError").length;
+				if(numError){
+					return false;
+				}
+				alert("注册成功")
+			})
+
+
+			// 用户输入时就可以提示是否正确，需要给表单绑定keyup和focus事件
+			// $("form :input").blur(function(){ 
+			//     //失去焦点处理函数
+			//     //代码省略...
+			// }).keyup(function(){
+			//     //triggerHandler 防止事件执行完后，浏览器自动为标签获得焦点
+			//     $(this).triggerHandler("blur"); 
+			// }).focus(function(){
+			//     $(this).triggerHandler("blur");
+			// });
+
+		})
+	</script>
+</head>
+<body>
+	<!-- JS验证表单 用户名 邮箱 -->
+	<div class="container" style="margin-top: 10%">
+		<form class="form-horizontal" role="form">
+			<!-- 用户名 -->
+		  <div class="form-group">
+		    <label class="col-sm-2 control-label">用户名</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control  required" id="name"  placeholder="请输入用户名">
+		    </div>
+		  </div>
+		  <!-- 邮箱 -->
+		  <div class="form-group">
+		    <label for="email" class="col-sm-2 control-label">邮箱</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control  required" id="email"  placeholder="请输入邮箱">
+		    </div>
+		  </div>
+		  <!-- 地址 -->
+		  <div class="form-group">
+		    <label for="address" class="col-sm-2 control-label">地址</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control required" id="address" placeholder="请输入地址">
+		    </div>
+		  </div>
+		  <!-- 提交 -->
+		  <div class="form-group">
+		     <div class="col-sm-offset-2 col-sm-10">
+		       <button type="submit" class="btn btn-primary" id="send">保存修改</button>
+		     </div>
+		   </div>
+
+
+
+		</form>
+	</div>
+	
+	
+</body>
+</html>
